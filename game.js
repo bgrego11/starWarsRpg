@@ -66,6 +66,8 @@ game = {
 
 	
 }
+
+//creates player select images
 var charDiv = $('#characters');
 
 for (i in game.characters) {
@@ -79,7 +81,7 @@ for (i in game.characters) {
 }
 
 
-
+//handles character select logic and html updates
 $('.charIcon').on("click", function(){
 	if (game.playerChosen === false) {
 	game.player = game.characters[$(this).data('person')];
@@ -95,6 +97,7 @@ $('.charIcon').on("click", function(){
 	game.ai = game.characters[$(this).data('person')];
 	game.ai.enterSound.play();
 	//add pic
+	$('#aiBattle').show();
 	$('#aiBattle').attr('src', game.ai.battler);
 	//add name & hp
 	$('#aiName').html('Name: '+game.ai.name);
@@ -108,8 +111,19 @@ $('.charIcon').on("click", function(){
 
 
 
-//game loop should be player select, ai selct, battle until hp = 0 then if enemies remain ai select then battle until hp = 0, else win
+
+//handles attacks, deaths,loss and victory
 $('#attackBtn').on("click", function() {
+        // function move() {
+    	$('#playerBattle').effect( "shake", {times:2}, 1000 );
+      //   	left : 100,
+   			// }, 1000, function() {
+		    //     $(this).animate({
+		    //         right: 100,
+		    //     }, 1000)});
+    	// move();
+
+
 	if (game.battleMode) {
 		$("#aiBattle").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 		game.battle();
@@ -123,9 +137,12 @@ $('#attackBtn').on("click", function() {
 			if (charDiv.html().length > 0) {
 			game.aiChosen = false;
 			game.battleMode = false;
+			$("#aiBattle").hide("explode", 1000);
+
 			$('#gameMsg').html('Choose Your Next Opponent');
 		} else {
 			$('#gameMsg').html('You Won');
+			$("#aiBattle").hide("explode", 1000);
 			game.battleMode = false;
 		}
 	};
