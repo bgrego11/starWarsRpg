@@ -1,0 +1,21 @@
+.charIcon {
+	overflow: hidden;
+	height: 100px;
+	width: 100px;
+	float:left;
+	border: 2px solid red;
+}
+
+.panel-default {
+	overflow: hidden;
+	height: 500px;
+
+}
+
+.panel-heading {
+	text-align: center;
+}
+
+.panel-body {
+	text-align: center;
+}
