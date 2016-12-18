@@ -27,3 +27,27 @@ body {
 .panel-body {
 	text-align: center;
 }
+
+#playerProg {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    background-color: grey;
+}
+#playerBar {
+    position: absolute;
+    height: 100%;
+    background-color: green;
+}
+
+#aiProg {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    background-color: grey;
+}
+#aiBar {
+    position: absolute;
+    height: 100%;
+    background-color: red;
+}
