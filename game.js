@@ -2,6 +2,7 @@ game = {
 	playerChosen: false,
 	aiChosen: false,
 	battleMode: false,
+	loseSound: new Audio('audio/lose.mp3'),
 	player: {
 		hp : 0,
 		batk: 0,
@@ -122,17 +123,9 @@ $('.charIcon').on("click", function(){
 
 //handles attacks, deaths,loss and victory
 $('#attackBtn').on("click", function() {
-        // function move() {
-    	$('#playerBattle').effect( "shake", {times:2}, 1000 );
-      //   	left : 100,
-   			// }, 1000, function() {
-		    //     $(this).animate({
-		    //         right: 100,
-		    //     }, 1000)});
-    	// move();
-
 
 	if (game.battleMode) {
+		$('#playerBattle').effect( "shake", {times:2}, 1000 );
 		$("#aiBattle").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 		game.battle();
 		$("#playerBar").css("width", ((game.player.hp/game.player.bhp)*100)+"%");
@@ -143,6 +136,8 @@ $('#attackBtn').on("click", function() {
 		if (game.player.hp < 0) {
 			console.log("you lost");
 			$('#gameMsg').html("You've Been Defeated");
+			$("#playerBattle").hide("explode", 1000);
+			game.loseSound.play();
 			game.battleMode = false;
 		} else if (game.ai.hp < 0) {
 			if (charDiv.html().length > 0) {
@@ -153,9 +148,13 @@ $('#attackBtn').on("click", function() {
 			$('#gameMsg').html('Choose Your Next Opponent');
 		} else {
 			$('#gameMsg').html('You Won');
-			$("#aiBattle").hide("explode",{pieces: 16}, 1000);
+			$("#aiBattle").hide("explode", 1000);
 			game.battleMode = false;
 		}
 	};
 	};
+});
+
+$(".toggle-icon").click(function() {
+  $('#nav-container').toggleClass("pushed");
 });
